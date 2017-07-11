@@ -16,8 +16,11 @@ public class FibonacciTest {
 	}
 	
 	public void shouldReturnOneForTwo() {
+		//given
 		Fibonacci fib = new Fibonacci();
+		//when
 		int test = fib.fibonacci(2);
+		//then
 		int results = 1;
 		
 		Assert.assertEquals(results, test);

@@ -19,5 +19,10 @@ public class StoreUserService {
         User user = new User(userDto.getName(), date);
         userDao.save(user);
     }
+    
+    public void storingUser(String name, LocalDate birthday){
+    	User user = new User(name, birthday);
+    	userDao.save(user);
+    }
 
 }
