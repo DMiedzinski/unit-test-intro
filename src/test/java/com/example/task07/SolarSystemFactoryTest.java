@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SolarSystemFactoryTest {
 
@@ -61,5 +62,35 @@ public class SolarSystemFactoryTest {
         assertEquals(marsGases, mars.getAtmosphereGases());
 
     }
+    
+    @Test
+    public void shouldCreateMercury() {
+        // given
+        SolarSystemFactory factory = new SolarSystemFactory();
 
+        // when
+        List<Planet> innerPlanets = factory.createInnerPlanets();
+        Planet mercury = innerPlanets.get(0);
+
+        // then
+        assertThat(mercury.getName()).isEqualTo("Mercury");
+        assertThat(mercury.getRotationDirection()).isEqualTo(RotationDirection.LEFT);
+        assertThat(mercury.getDiameter().getMeter()).isEqualTo(new BigDecimal("4879400"));
+        assertThat(mercury.getSiderealYear().inEarthDays()).isEqualTo(new BigDecimal("87.96935"));
+        assertThat(mercury.getAcceleration()).isEqualTo(3.701);
+        assertThat(mercury.getAtmosphereGases()).contains(Gas.OXYGEN, Gas.SODIUM, Gas.HYDROGEN);
+}
+    @Test
+    public void shouldCreatePlanet() {
+        // given
+        SolarSystemFactory factory = new SolarSystemFactory();
+
+        // when
+        List<Planet> innerPlanets = factory.createInnerPlanets();
+
+        // then
+        Planet mercury = innerPlanets.get(0);
+        PlanetAssert.assertThat(mercury).hasName("Mercury")
+        .hasRotation(RotationDirection.LEFT);
+}
 }
